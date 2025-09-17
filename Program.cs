@@ -11,6 +11,8 @@ string switchControl = "menu";
 
 while (true) // Ciclo While para repetir el juego
 {
+    System.Console.Clear(); // Limpiar la consola
+
     // Menú principal del juego
     Console.WriteLine("\nWelcome al C a s i n o");
     Console.WriteLine("¿Cuántos Coins deseas? \n" +
@@ -20,6 +22,7 @@ while (true) // Ciclo While para repetir el juego
 
     if (coins <= 0) // Se cierra el ciclo While
     {
+        Console.WriteLine("Saliendo...");
         break;
     }
 
@@ -29,7 +32,7 @@ while (true) // Ciclo While para repetir el juego
         // Reiniciar variables para la siguiente ronda
         totalJugador = 0;
         totalDealer = 0;
-        Console.WriteLine("Siguiente ronda:");
+        Console.WriteLine("\nSiguiente ronda:");
         Console.WriteLine("1. Comenzar\n2. Rendirte");
         // Solicitar al jugador si desea seguir o rendirse
         Console.Write("Escriba '1' para seguir o '2' para rendirte: ");
@@ -43,7 +46,7 @@ while (true) // Ciclo While para repetir el juego
                 {
                     num = random.Next(1, 12); // Generar un número aleatorio entre 1 y 11
                     totalJugador = totalJugador + num;
-                    Console.WriteLine("Toma tu carta, jugador,");
+                    Console.WriteLine("Tomando tu carta...");
                     Console.WriteLine($"Te salió el número: {num} ");
                     Console.WriteLine("¿Deseas otra carta?"); // Preguntar si desea otra carta
                     controlOtraCarta = Console.ReadLine();
@@ -55,36 +58,38 @@ while (true) // Ciclo While para repetir el juego
 
                 totalDealer = random.Next(14, 23); // Generar un número aleatorio para el dealer entre 14 y 22
                 // Muestrar los totales del jugador y del dealer
-                Console.WriteLine($"Tu total es {totalJugador}");
-                Console.WriteLine($"El dealer tiene {totalDealer}");
+                Console.WriteLine($"-Tu total es {totalJugador}");
+                Console.WriteLine($"-El dealer tiene {totalDealer}");
 
                 // Regla para ganar : Juntar mas de 15 cartas y menos de 22 y mas que el dealer
 
                 // Determinar el resultado de la ronda
                 if (totalJugador > totalDealer && totalJugador < 22) // Ganar al dealer
                 {
-                    message = "Venciste al dealer, felicidades";
+                    message = "> Venciste al dealer, felicidades";
                 }
                 else if (totalJugador >= 22) // Perder por pasarse de 21
                 {
-                    message = "Perdiste vs el dealer, te pasaste de 21";
+                    message = "> Perdiste vs el dealer, te pasaste de 21";
                 }
                 else if (totalJugador <= totalDealer) // Perder al dealer
                 {
-                    message = "Perdiste vs el dealer, lo siento";
+                    message = "> Perdiste vs el dealer, lo siento";
                 }
                 else // Condición no válida
                 {
-                    message = "Condición no válida";
+                    message = "> Condición no válida";
                 }
                 // Muestra el resultado obtenido
                 Console.WriteLine(message);
+                Console.WriteLine("--Presiona una tecla para continuar...");
+                Console.ReadKey(); // Esperar a que presione una tecla
                 break;
             case "2": // Rendirte en la ronda
                 i = coins; // Salir del ciclo For
                 break;
             default: // Opción no válida
-                Console.WriteLine("Valor ingresa no válido en el  C A S I N O");
+                Console.WriteLine("--Valor ingresa no válido en el  C A S I N O");
                 break;
         }
     }
