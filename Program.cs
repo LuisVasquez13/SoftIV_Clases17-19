@@ -1,14 +1,13 @@
-﻿using System.Drawing;
+﻿// Programa trabajado segun lo visto en los videos del 17 al 19 de C# en Platzi
+// Desarrollo de Software IV
+
+using System.Drawing;
 System.Random random = new System.Random(); // Crear una instancia de Random para generar números aleatorios
 
 int totalJugador = 0, totalDealer = 0, num = 0, coins = 0;
 string message = "";
 string controlOtraCarta = "";
 string switchControl = "menu";
-
-//Blackjack, Juntar 21 pidiendo, en casa de pasarte de 21 pierdes.
-//cartas o en caso de tener menos
-//de 21 igual tener mayor puntuación que el dealer
 
 while (true) // Ciclo While para repetir el juego
 {
@@ -46,38 +45,39 @@ while (true) // Ciclo While para repetir el juego
                     totalJugador = totalJugador + num;
                     Console.WriteLine("Toma tu carta, jugador,");
                     Console.WriteLine($"Te salió el número: {num} ");
-                    Console.WriteLine("¿Deseas otra carta ?"); // Preguntar si desea otra carta
+                    Console.WriteLine("¿Deseas otra carta?"); // Preguntar si desea otra carta
                     controlOtraCarta = Console.ReadLine();
 
+                // Repetir si el jugador quiere otra carta
                 } while (controlOtraCarta == "Si" ||
                          controlOtraCarta == "si" ||
-                         controlOtraCarta == "yes"); // Repetir si el jugador quiere otra carta
+                         controlOtraCarta == "yes"); 
 
                 totalDealer = random.Next(14, 23); // Generar un número aleatorio para el dealer entre 14 y 22
                 // Muestrar los totales del jugador y del dealer
                 Console.WriteLine($"Tu total es {totalJugador}");
                 Console.WriteLine($"El dealer tiene {totalDealer}");
 
+                // Regla para ganar : Juntar mas de 15 cartas y menos de 22 y mas que el dealer
+
                 // Determinar el resultado de la ronda
                 if (totalJugador > totalDealer && totalJugador < 22) // Ganar al dealer
                 {
                     message = "Venciste al dealer, felicidades";
-                    switchControl = "menu";
                 }
                 else if (totalJugador >= 22) // Perder por pasarse de 21
                 {
                     message = "Perdiste vs el dealer, te pasaste de 21";
-                    switchControl = "menu";
                 }
                 else if (totalJugador <= totalDealer) // Perder al dealer
                 {
                     message = "Perdiste vs el dealer, lo siento";
-                    switchControl = "menu";
                 }
                 else // Condición no válida
                 {
-                    message = "condición no válida";
+                    message = "Condición no válida";
                 }
+                // Muestra el resultado obtenido
                 Console.WriteLine(message);
                 break;
             case "2": // Rendirte en la ronda
